@@ -6,12 +6,12 @@ In this file I will document the process as detailed as possible to rethink abou
 ## Index
 
 [Start](#Starting-the-project) <br />
-[First Story](#First-user-story) <br />
-[Second story](#Second-user-story) <br />
+[First Story](#First-story) <br />
+[Second story](#Second-story) <br />
 
 ### Starting the project
 
-To start the project I made a new directory for the project, then initialised git and rspec.
+To start the project We made a new directory for the project, then initialised git and rspec.
 
 ```shell
 $ mkdir dice
@@ -126,9 +126,11 @@ end
  end
  ```
 
+It is time to commit and push this new feature of our program.
+
  With this our test is Green and we move on the next user story.
 
- ### Second user story
+ ### Second story
 
 We will focus in the second story for this part.
  >As a board game player,
@@ -143,3 +145,12 @@ In this story we see that the user expect to get a number between 1 and 6 when `
 2.2.3 :002 > score = d.roll
  => nil
  ```
+We get nil from this, we need to add a test for this feature in [dice_spec.rb](./lib/dice_spec.rb).
+
+```ruby
+it 'gives a number between 1 and 6 when rolled' do
+  expect(subject.roll).to be_between(1, 6)
+end
+```
+
+We add some code to pass this test.
