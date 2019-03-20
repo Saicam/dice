@@ -11,6 +11,7 @@ In this file I will document the process as detailed as possible to rethink abou
 [Third story](#Third-story) <br />
 [Fourth story](#Fourth-story) <br />
 [Fifth story](#Fifth-story) <br />
+[Refactoring](#Refactoring)
 
 ### Starting the project
 
@@ -263,4 +264,33 @@ end
 
 We now pass the new test but we fail the one where we roll one dice, as we expect a number but receive and array with the number, let's adapt this test to the new code.
 
-Now we pass all the test we made for each story, but
+Now we pass all the test we made for each story, is a good moment to commit and push the changes.
+
+### Refactoring
+
+Considering the simplicity of the code for the first 4 story I didn't considered refactoring as needed, but after the last one we can consider if the function roll is doing too much.
+
+To make the method more readable we could make a new method to abstract the randomness of one dice roll with this method
+
+```ruby
+private
+def dice_roll
+  rand(6) + 1
+end
+```
+
+And changing in `roll` the folowing line:
+
+
+```ruby
+number_of_dices.times { results << dice_roll }
+```
+
+Now we can consider that we don't actually need to instantiate a dice for it to work, so we could change the method to class methods adding self. to their names.
+
+```ruby
+self.roll
+self.dice_roll
+```
+
+And for the test to work properly we should change the subject to Dice.
