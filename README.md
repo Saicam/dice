@@ -9,6 +9,7 @@ In this file I will document the process as detailed as possible to rethink abou
 [First Story](#First-story) <br />
 [Second story](#Second-story) <br />
 [Third story](#Third-story) <br />
+[Fourth story](#Fourth-story) <br />
 
 ### Starting the project
 
@@ -171,3 +172,48 @@ So that I give players a good game experience
 I want the dice roll to be randomly picked
 
 In this story the user need the number he gets from roll to be randomly generated. We know is always going to give a 2. So lets make a test first.
+
+After some research I see testing randomness is not a trivial problem so I will just add the code.
+
+```ruby
+def roll
+  rand(6) + 1
+end
+```
+
+We commit and push this new feature.
+
+### Fourth Story
+
+>As a board game player,
+So that I can play many types of games
+I want to be able to roll any number of dice at the same time
+
+In this case we want to be able to roll more than one dice at one. Lets feature test this on how it could work.
+
+```shell
+2.2.3 :002 > d.roll(4)
+ArgumentError: wrong number of arguments (1 for 0)
+	from /Users/saicam/Documents/projects/dice/lib/dice.rb:3:in roll
+	from (irb):2
+	from /Users/saicam/.rvm/rubies/ruby-2.2.3/bin/irb:11:in <main>
+```
+
+As we can see we don't accept any arguments yet. Lets make a test that allow us to know if responds with one argument.
+
+```ruby
+it { is_expected.to respond_to(:roll).with(1).argument }
+```
+
+To pass this test we add in [dice.rb](./lib/dice.rb):
+```ruby
+def roll(number_of_dices)
+  number_of_dices.times { rand(6) + 1}
+end
+```
+Now we can see that this test is passed but we fail a previous one. We can see from the error that we expect to get a number between 1 and 6 when called with no argument. To fix this we could change the test to pass the argument. But I will add the feature that if `roll` doesn't receive any argument it will roll one dice.
+```ruby
+def roll(number_of_dices = 1)
+  number_of_dices.times { rand(6) + 1}
+end
+```

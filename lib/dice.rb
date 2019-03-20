@@ -1,6 +1,6 @@
 class Dice
 
-  def roll
-    rand(6) + 1
+  def roll(number_of_dices = 1)
+    number_of_dices.times { rand(6) + 1}
   end
 end
