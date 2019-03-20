@@ -10,6 +10,7 @@ In this file I will document the process as detailed as possible to rethink abou
 [Second story](#Second-story) <br />
 [Third story](#Third-story) <br />
 [Fourth story](#Fourth-story) <br />
+[Fifth story](#Fifth-story) <br />
 
 ### Starting the project
 
@@ -217,3 +218,49 @@ def roll(number_of_dices = 1)
   number_of_dices.times { rand(6) + 1}
 end
 ```
+
+Now we pass all the tests again, so we will commit and push our new code.
+
+### Fifth Story
+
+>As a board game player,
+So that I know what my score was when I rolled several dice
+I want to get the result of each dice roll
+
+In this story we want to get the result of all the dice we rolled. Lets feature test it:
+
+```shell
+2.2.3 :005 > d.roll(5)
+ => 5
+2.2.3 :006 > d.roll(16)
+ => 16
+ ```
+
+ We can see that we receive the number of dice we want to roll now. Lets test this feature, expecting an array of the number of dice we rolled with number between 1 and 6.
+
+First we test the number of result given:
+```ruby
+ it "give the right number of results" do
+   expect(subject.roll(7).size).to eq 7
+ end
+```
+
+Then we test that gives result between 1 and 6
+```ruby
+ it "give all the results between 1 and 6" do
+   expect(subject.roll(10)).to all( be_between(1,6) )
+ end
+```
+
+To pass these tests we add in [dice.rb](./lib/dice.rb) the code:
+```ruby
+def roll(number_of_dices = 1)
+  results = []
+  number_of_dices.times { results << rand(6) + 1 }
+  return results
+end
+```
+
+We now pass the new test but we fail the one where we roll one dice, as we expect a number but receive and array with the number, let's adapt this test to the new code.
+
+Now we pass all the test we made for each story, but
