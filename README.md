@@ -8,6 +8,7 @@ In this file I will document the process as detailed as possible to rethink abou
 [Start](#Starting-the-project) <br />
 [First Story](#First-story) <br />
 [Second story](#Second-story) <br />
+[Third story](#Third-story) <br />
 
 ### Starting the project
 
@@ -154,3 +155,19 @@ end
 ```
 
 We add some code to pass this test.
+
+```ruby
+def roll
+  2
+end
+```
+
+We can see that the test is green now. It is time to commit and push.
+
+### Third story
+
+>As a dice app developer,
+So that I give players a good game experience
+I want the dice roll to be randomly picked
+
+In this story the user need the number he gets from roll to be randomly generated. We know is always going to give a 2. So lets make a test first.
